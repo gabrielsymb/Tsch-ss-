@@ -1,6 +1,7 @@
 import Fastify, { type FastifyInstance } from "fastify";
 import type { EntryRepository } from "./domain/entry.js";
 import { registerEntryRoutes } from "./routes/entries.js";
+import { registerWebRoutes } from "./routes/web.js";
 import { EntryService } from "./services/entry-service.js";
 
 export interface AppDependencies {
@@ -26,5 +27,6 @@ export async function buildApp({
   });
 
   await registerEntryRoutes(app, service);
+  await registerWebRoutes(app);
   return app;
 }

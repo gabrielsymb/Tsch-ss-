@@ -1,10 +1,10 @@
 # Tsch-ss-
 
-# Dicionário de Cálculo — API
+# Dicionário de Cálculo
 
-Backend inicial de um dicionário pesquisável de derivadas, integrais e técnicas
-de integração. A interface ainda não faz parte deste projeto: o consumo é por
-JSON e as fórmulas são armazenadas em LaTeX.
+Dicionário pesquisável de derivadas, integrais e técnicas de integração, com
+uma interface web responsiva e uma API JSON. As fórmulas são armazenadas em
+LaTeX.
 
 ## Stack
 
@@ -19,7 +19,8 @@ JSON e as fórmulas são armazenadas em LaTeX.
 2. Inicie o PostgreSQL com `docker compose up -d db` (ou use um servidor PostgreSQL já disponível).
 3. Instale as dependências com `npm install`.
 4. Crie as tabelas e carregue o catálogo com `npm run db:init`.
-5. Inicie a API com `npm run dev`.
+5. Inicie o serviço com `npm run dev` e abra `http://127.0.0.1:3000/` para a
+   interface ou `/api/v1/entries` para consultar a API.
 
 O comando `npm run db:init` aplica, em ordem, as migrações SQL ainda pendentes
 em `database/migrations/` e atualiza o catálogo inicial. As versões aplicadas
@@ -32,11 +33,11 @@ dados. O seed permanece idempotente.
 
 ### Testar a API sem instalar PostgreSQL nem Docker
 
-Execute `npm run dev:demo` e abra `http://127.0.0.1:3000/api/v1/entries`.
-Esse modo inicia um servidor HTTP real com três verbetes demonstrativos em
-memória. Ele serve para experimentar o formato JSON e as rotas, mas não conecta
-ao banco nem testa o catálogo completo. A resposta de `/health` identifica esse
-modo com `"database": "not-configured"`.
+Execute `npm run dev:demo` e abra `http://127.0.0.1:3000/` para experimentar a
+interface. Esse modo inicia um servidor HTTP real com três verbetes
+demonstrativos em memória. Ele não conecta ao banco nem representa o catálogo
+completo. A resposta de `/health` identifica esse modo com
+`"database": "not-configured"`.
 
 ## Endpoints
 
@@ -44,6 +45,7 @@ modo com `"database": "not-configured"`.
 - `GET /api/v1/categories` — lista as categorias.
 - `GET /api/v1/entries` — pesquisa com `q`, `kind`, `category`, `limit` e `offset`.
 - `GET /api/v1/entries/:slug` — consulta um verbete.
+- `GET /` — interface web responsiva para pesquisa e consulta.
 
 `kind` aceita `derivative`, `integral` ou `technique`. A resposta de pesquisa
 contém `data` e `pagination`; cada verbete inclui categoria, condições, notas e
@@ -68,6 +70,13 @@ determinística de normalização matemática e índices para correspondências
 aproximadas em títulos, aliases e notações. O PostgreSQL e o modo demo ordenam
 resultados por qualidade de correspondência; paginação e total são calculados
 por verbete, sem duplicação por aliases/notações.
+
+A interface permite pesquisar por nome ou notação, filtrar por tipo e
+categoria, consultar detalhes, condições e referências, e navegar pelos
+resultados. Ela usa somente recursos locais, sem scripts de rastreamento ou
+cadastro. O KaTeX e suas fontes são servidos localmente; fórmulas dos resultados,
+detalhes e exemplos são compostas no navegador. Se uma expressão LaTeX for
+inválida, sua notação original permanece visível como alternativa legível.
 
 ## Critério para o conteúdo inicial
 

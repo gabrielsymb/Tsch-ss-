@@ -29,6 +29,13 @@ VALUES
         DATE '2026-11-09'
     ),
     (
+        'Derivatives of Inverse Functions',
+        'https://openstax.org/books/calculus-volume-1/pages/3-7-derivatives-of-inverse-functions',
+        'OpenStax',
+        'CC BY 4.0',
+        DATE '2026-11-09'
+    ),
+    (
         'Derivatives of Exponential and Logarithmic Functions',
         'https://openstax.org/books/calculus-volume-1/pages/3-9-derivatives-of-exponential-and-logarithmic-functions',
         'OpenStax',
@@ -163,10 +170,10 @@ FROM (VALUES
     ('derivative-arcsine', 'Derivada do arco-seno', 'derivative', 'inverse-trigonometric',
      'f(x)=\arcsin(x)', '\frac{d}{dx}\arcsin(x)=\frac{1}{\sqrt{1-x^2}}',
      '-1<x<1.',
-     'Nos extremos, a expressão da derivada não é finita.', 'Antiderivatives'),
+     'Nos extremos, a expressão da derivada não é finita.', 'Derivatives of Inverse Functions'),
     ('derivative-arctangent', 'Derivada do arco-tangente', 'derivative', 'inverse-trigonometric',
      'f(x)=\arctan(x)', '\frac{d}{dx}\arctan(x)=\frac{1}{1+x^2}',
-     'x real.', '', 'Antiderivatives'),
+     'x real.', '', 'Derivatives of Inverse Functions'),
     ('integral-constant', 'Integral de uma constante', 'integral', 'algebraic',
      '\int c\,dx', 'cx+C', 'c é constante.',
      'C representa uma constante arbitrária de integração.', 'Antiderivatives'),

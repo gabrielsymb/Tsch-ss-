@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Consulte regras de derivação, integrais e técnicas de integração para Cálculo I."
+    >
+    <meta name="theme-color" content="#f5f4ef">
+    <title>Dicionário de Cálculo I</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/katex/katex.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <script defer src="/katex/katex.min.js"></script>
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Ir para o conteúdo</a>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Dicionário de Cálculo I, início">
+        <span class="wordmark-symbol" aria-hidden="true">∫</span>
+        <span>Dicionário de Cálculo I</span>
+      </a>
+      <p>Regras, fórmulas e técnicas de derivação e integração.</p>
+    </header>
+
+    <main id="main">
+      <p id="demo-notice" class="demo-notice" role="status" hidden></p>
+      <section class="search-panel" aria-labelledby="search-title">
+        <p class="eyebrow">CONSULTA</p>
+        <h1 id="search-title">Encontre uma fórmula</h1>
+        <form id="search-form">
+          <label for="query">Nome, função ou notação</label>
+          <div class="search-row">
+            <input
+              id="query"
+              name="q"
+              type="search"
+              maxlength="100"
+              autocomplete="off"
+              placeholder="Ex.: regra da cadeia"
+            >
+            <button class="button button-primary" type="submit">Buscar</button>
+          </div>
+          <div class="filter-row">
+            <div class="field">
+              <label for="kind">Tipo</label>
+              <select id="kind" name="kind">
+                <option value="">Todos</option>
+                <option value="derivative">Derivadas</option>
+                <option value="integral">Integrais</option>
+                <option value="technique">Técnicas</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="category">Categoria</label>
+              <select id="category" name="category">
+                <option value="">Todas</option>
+              </select>
+            </div>
+            <button class="button button-secondary" id="clear-filters" type="button">
+              Limpar filtros
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <div class="content-layout">
+        <section class="results-section" aria-labelledby="results-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">CATÁLOGO</p>
+              <h2 id="results-title">Resultados</h2>
+            </div>
+            <p id="result-count" class="result-count" aria-live="polite"></p>
+          </div>
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+          <ol id="results" class="results-list"></ol>
+          <nav id="pagination" class="pagination" aria-label="Paginação"></nav>
+        </section>
+        <section id="entry-detail" class="detail-panel" aria-live="polite" hidden></section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Consulta pública, sem cadastro.</p>
+    </footer>
+  </body>
+</html>
