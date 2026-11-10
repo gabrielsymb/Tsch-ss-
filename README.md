@@ -1,3 +1,5 @@
+# Tsch-ss-
+
 # Dicionário de Cálculo — API
 
 Backend inicial de um dicionário pesquisável de derivadas, integrais e técnicas
