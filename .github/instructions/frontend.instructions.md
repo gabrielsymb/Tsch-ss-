@@ -2,14 +2,14 @@
 applyTo: "public/**,src/web.ts,frontend/**,web/**"
 ---
 
-# Diretrizes de frontend do Dicionário de Cálculo
+# Diretrizes de frontend do Tschüss
 
 Antes de alterar os caminhos abrangidos, consulte [docs/frontend-standards.md](../../docs/frontend-standards.md). Estas regras se aplicam ao frontend definitivo e à interface temporária, mas não autorizam uma reformulação completa sem pedido explícito.
 
 ## Produto e experiência
-- O produto é um dicionário mobile-first de integrais, derivadas e técnicas, não um resolvedor automático. A tarefa principal é localizar e ler um verbete em poucos toques.
+- O produto é um catálogo de consulta mobile-first que começou com conteúdo de cálculo e poderá abranger outros assuntos. A interface principal deve ser neutra quanto ao domínio; filtros e detalhes específicos de uma área só devem aparecer quando forem pertinentes ao conteúdo disponível.
 - Preserve o contrato atual da API, a pesquisa, filtros, paginação, referências, aviso de demonstração e renderização de LaTeX via KaTeX.
-- Use títulos e instruções concretos em português brasileiro. Priorize reconhecimento sobre memorização; mostre condições de validade junto da fórmula.
+- Use títulos e instruções concretos em português brasileiro. Prefira “item” ou “conteúdo” a “verbete”. Priorize reconhecimento sobre memorização; mostre condições de validade junto da fórmula matemática quando houver.
 - Estabeleça hierarquia clara, agrupe informações relacionadas e adote padrões conhecidos de busca e navegação. Não imponha menus ou etapas apenas para demonstrar princípios de UX.
 - Não acrescente alegações, avaliações, números, depoimentos ou promessas sem dados verificáveis.
 

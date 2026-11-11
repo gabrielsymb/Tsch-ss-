@@ -76,6 +76,13 @@ VALUES
         'OpenStax',
         'CC BY 4.0',
         DATE '2026-11-09'
+    ),
+    (
+        'Unit Circle: Sine and Cosine Functions',
+        'https://openstax.org/books/precalculus-2e/pages/5-2-unit-circle-sine-and-cosine-functions',
+        'OpenStax',
+        'CC BY 4.0',
+        DATE '2026-11-10'
     )
 ON CONFLICT (url) DO UPDATE SET
     title = EXCLUDED.title,
@@ -90,7 +97,8 @@ VALUES
     ('exponential-logarithmic', 'Exponenciais e logaritmos', 'Funções exponenciais, logarítmicas e suas primitivas.'),
     ('trigonometric', 'Trigonométricas', 'Derivadas e integrais de funções trigonométricas.'),
     ('inverse-trigonometric', 'Trigonométricas inversas', 'Fórmulas associadas a funções trigonométricas inversas.'),
-    ('integration-techniques', 'Técnicas de integração', 'Métodos para integrais que não se resolvem diretamente.')
+    ('integration-techniques', 'Técnicas de integração', 'Métodos para integrais que não se resolvem diretamente.'),
+    ('reference-tables', 'Tabelas de consulta', 'Tabelas de fórmulas e valores de referência.')
 ON CONFLICT (slug) DO UPDATE SET
     name = EXCLUDED.name,
     description = EXCLUDED.description;
@@ -122,7 +130,7 @@ FROM (VALUES
     ('derivative-quotient', 'Regra do quociente', 'derivative', 'derivative-rules',
      'f(x)=\frac{u(x)}{v(x)}',
      '\frac{d}{dx}\left(\frac{u}{v}\right)=\frac{u''v-uv''}{v^2}',
-     'u e v são diferenciáveis e v(x)\ne0.',
+     'u e v são diferenciáveis e \(v(x)\ne0\).',
      'A ordem no numerador é derivada de cima vezes baixo, menos cima vezes derivada de baixo.', 'Differentiation Rules'),
     ('derivative-chain-rule', 'Regra da cadeia', 'derivative', 'derivative-rules',
      'f(x)=u(v(x))', '\frac{d}{dx}u(v(x))=u''(v(x))v''(x)',
@@ -131,7 +139,7 @@ FROM (VALUES
     ('derivative-exponential-e', 'Derivada da exponencial natural', 'derivative', 'exponential-logarithmic',
      'f(x)=e^{u(x)}', '\frac{d}{dx}e^{u(x)}=e^{u(x)}u''(x)',
      'u é diferenciável.',
-     'Caso particular: \frac{d}{dx}e^x=e^x.', 'Derivatives of Exponential and Logarithmic Functions'),
+     'Caso particular: \(\frac{d}{dx}e^x=e^x\).', 'Derivatives of Exponential and Logarithmic Functions'),
     ('derivative-exponential-base', 'Derivada de uma exponencial de base a', 'derivative', 'exponential-logarithmic',
      'f(x)=a^{u(x)}',
      '\frac{d}{dx}a^{u(x)}=a^{u(x)}\ln(a)u''(x)',
@@ -144,29 +152,29 @@ FROM (VALUES
     ('derivative-log-base', 'Derivada do logaritmo de base a', 'derivative', 'exponential-logarithmic',
      'f(x)=\log_a(u(x))',
      '\frac{d}{dx}\log_a(u(x))=\frac{u''(x)}{u(x)\ln(a)}',
-     'a>0, a\ne1, u(x)>0 e u é diferenciável.',
+     'a deve ser positivo e diferente de 1, u(x)>0 e u é diferenciável.',
      'O logaritmo de base a pode ser reescrito usando o logaritmo natural.', 'Derivatives of Exponential and Logarithmic Functions'),
     ('derivative-sine', 'Derivada do seno', 'derivative', 'trigonometric',
      'f(x)=\sin(x)', '\frac{d}{dx}\sin(x)=\cos(x)',
      'x em radianos.',
-     'Para \sin(u(x)), aplicar também a regra da cadeia.', 'Derivatives of Trigonometric Functions'),
+     'Para \(\sin(u(x))\), aplicar também a regra da cadeia.', 'Derivatives of Trigonometric Functions'),
     ('derivative-cosine', 'Derivada do cosseno', 'derivative', 'trigonometric',
      'f(x)=\cos(x)', '\frac{d}{dx}\cos(x)=-\sin(x)',
      'x em radianos.',
-     'Para \cos(u(x)), aplicar também a regra da cadeia.', 'Derivatives of Trigonometric Functions'),
+     'Para \(\cos(u(x))\), aplicar também a regra da cadeia.', 'Derivatives of Trigonometric Functions'),
     ('derivative-tangent', 'Derivada da tangente', 'derivative', 'trigonometric',
      'f(x)=\tan(x)', '\frac{d}{dx}\tan(x)=\sec^2(x)',
-     'Onde \cos(x)\ne0; x em radianos.',
-     'A função não está definida nos pontos em que \cos(x)=0.', 'Derivatives of Trigonometric Functions'),
+     'Onde \(\cos(x)\ne0\); x em radianos.',
+     'A função não está definida nos pontos em que \(\cos(x)=0\).', 'Derivatives of Trigonometric Functions'),
     ('derivative-cotangent', 'Derivada da cotangente', 'derivative', 'trigonometric',
      'f(x)=\cot(x)', '\frac{d}{dx}\cot(x)=-\csc^2(x)',
-     'Onde \sin(x)\ne0; x em radianos.', '', 'Derivatives of Trigonometric Functions'),
+     'Onde \(\sin(x)\ne0\); x em radianos.', '', 'Derivatives of Trigonometric Functions'),
     ('derivative-secant', 'Derivada da secante', 'derivative', 'trigonometric',
      'f(x)=\sec(x)', '\frac{d}{dx}\sec(x)=\sec(x)\tan(x)',
-     'Onde \cos(x)\ne0; x em radianos.', '', 'Derivatives of Trigonometric Functions'),
+     'Onde \(\cos(x)\ne0\); x em radianos.', '', 'Derivatives of Trigonometric Functions'),
     ('derivative-cosecant', 'Derivada da cossecante', 'derivative', 'trigonometric',
      'f(x)=\csc(x)', '\frac{d}{dx}\csc(x)=-\csc(x)\cot(x)',
-     'Onde \sin(x)\ne0; x em radianos.', '', 'Derivatives of Trigonometric Functions'),
+     'Onde \(\sin(x)\ne0\); x em radianos.', '', 'Derivatives of Trigonometric Functions'),
     ('derivative-arcsine', 'Derivada do arco-seno', 'derivative', 'inverse-trigonometric',
      'f(x)=\arcsin(x)', '\frac{d}{dx}\arcsin(x)=\frac{1}{\sqrt{1-x^2}}',
      '-1<x<1.',
@@ -179,16 +187,16 @@ FROM (VALUES
      'C representa uma constante arbitrária de integração.', 'Antiderivatives'),
     ('integral-power', 'Regra da potência para integrais', 'integral', 'algebraic',
      '\int x^n\,dx', '\frac{x^{n+1}}{n+1}+C',
-     'n\ne-1; considerar o domínio da potência.',
-     'O caso n=-1 é separado: \int\frac{1}{x}\,dx=\ln|x|+C.', 'Antiderivatives'),
+     'n deve ser diferente de -1; considerar o domínio da potência.',
+     'O caso n=-1 é separado: \(\int\frac{1}{x}\,dx=\ln|x|+C\).', 'Antiderivatives'),
     ('integral-power-chain', 'Potência de uma função por sua derivada', 'integral', 'algebraic',
      '\int [g(x)]^n g''(x)\,dx',
      '\frac{[g(x)]^{n+1}}{n+1}+C',
-     'n\ne-1 e g é diferenciável.',
+     'n deve ser diferente de -1 e g é diferenciável.',
      'É uma aplicação direta da substituição u=g(x).', 'Substitution'),
     ('integral-reciprocal', 'Integral de um sobre x', 'integral', 'exponential-logarithmic',
      '\int\frac{1}{x}\,dx', '\ln|x|+C',
-     'x\ne0; a fórmula vale em intervalos que não atravessam zero.',
+     'x deve ser diferente de zero; a fórmula vale em intervalos que não atravessam zero.',
      'O valor absoluto contempla os intervalos positivos e negativos.', 'Antiderivatives'),
     ('integral-exponential-e', 'Integral da exponencial natural', 'integral', 'exponential-logarithmic',
      '\int e^x\,dx', 'e^x+C', '',
@@ -199,16 +207,16 @@ FROM (VALUES
      'A derivada da parte interna deve aparecer multiplicando o integrando.', 'Substitution'),
     ('integral-exponential-base', 'Integral de uma exponencial de base a', 'integral', 'exponential-logarithmic',
      '\int a^x\,dx', '\frac{a^x}{\ln(a)}+C',
-     'a>0 e a\ne1.',
+     'a deve ser positivo e diferente de 1.',
      'A fórmula decorre da derivada de a^x.', 'Antiderivatives'),
     ('integral-exponential-base-chain', 'Exponencial de base a composta', 'integral', 'exponential-logarithmic',
      '\int a^{g(x)}g''(x)\,dx',
      '\frac{a^{g(x)}}{\ln(a)}+C',
-     'a>0, a\ne1 e g é diferenciável.',
+     'a deve ser positivo e diferente de 1, e g é diferenciável.',
      'A derivada da parte interna deve aparecer multiplicando o integrando.', 'Substitution'),
     ('integral-log-chain', 'Logaritmo de uma função sobre a função', 'integral', 'exponential-logarithmic',
      '\int\frac{g''(x)}{g(x)}\,dx', '\ln|g(x)|+C',
-     'g é diferenciável e g(x)\ne0 no intervalo.',
+     'g é diferenciável e \(g(x)\ne0\) no intervalo.',
      'A fórmula vale em cada intervalo que não contém zeros de g.', 'Substitution'),
     ('integral-sine', 'Integral do seno', 'integral', 'trigonometric',
      '\int\sin(x)\,dx', '-\cos(x)+C', 'x em radianos.', '', 'Antiderivatives'),
@@ -259,7 +267,19 @@ FROM (VALUES
      '\int\frac{P(x)}{Q(x)}\,dx',
      'Decomponha \frac{P(x)}{Q(x)} em frações mais simples e integre cada parcela.',
      'Antes da decomposição, a fração deve ser própria; se necessário, faça divisão polinomial.',
-     'A forma da decomposição depende dos fatores do denominador.', 'Partial Fractions')
+     'A forma da decomposição depende dos fatores do denominador.', 'Partial Fractions'),
+    ('integral-immediate-reference', 'Tabela de integrais imediatas', 'reference', 'reference-tables',
+     'Tabela de integrais imediatas',
+     '17 fórmulas de primitivas usuais.',
+     'Em integrais de potência, n deve ser diferente de -1. Na integral de a elevado a x, a deve ser positiva e diferente de 1. Nas fórmulas trigonométricas, x está em radianos.',
+     'Cada fórmula representa uma família de primitivas; C é uma constante real. Fórmulas compostas podem exigir a derivada da função interna.',
+     'Antiderivatives'),
+    ('notable-angles-reference', 'Ângulos notáveis', 'reference', 'reference-tables',
+     'Ângulos notáveis',
+     'Valores de seno, cosseno e tangente para cinco ângulos.',
+     'Valores de 0° a 90°. A tangente de 90° é indefinida.',
+     'No círculo unitário, cosseno e seno são as coordenadas horizontal e vertical. A tangente é o seno dividido pelo cosseno quando o cosseno não é zero.',
+     'Unit Circle: Sine and Cosine Functions')
 ) AS item(slug, title, kind, category_slug, expression, result, conditions, notes, source_title)
 JOIN sources AS source ON source.title = item.source_title
 ON CONFLICT (slug) DO UPDATE SET
@@ -273,16 +293,71 @@ ON CONFLICT (slug) DO UPDATE SET
     source_id = EXCLUDED.source_id,
     updated_at = NOW();
 
+INSERT INTO entry_sources (entry_id, source_id, role)
+SELECT entry.id, entry.source_id, 'primary'
+FROM entries AS entry
+WHERE entry.slug IN ('integral-immediate-reference', 'notable-angles-reference')
+ON CONFLICT (entry_id, source_id) DO UPDATE SET
+    role = EXCLUDED.role;
+
 INSERT INTO entry_aliases (entry_id, alias)
 SELECT entry.id, alias.value
 FROM (VALUES
     ('derivative-power', 'regra da potência'),
     ('derivative-power', 'power rule'),
     ('integral-power', 'primitiva de x elevado a n'),
+    ('integral-immediate-reference', 'integrais imediatas'),
+    ('integral-immediate-reference', 'tabela de primitivas'),
+    ('notable-angles-reference', 'tabela de ângulos notáveis'),
+    ('notable-angles-reference', 'valores de seno cosseno e tangente'),
     ('technique-substitution', 'mudança de variável'),
     ('technique-substitution', 'u-substitution')
 ) AS alias(entry_slug, value)
 JOIN entries AS entry ON entry.slug = alias.entry_slug
+ON CONFLICT DO NOTHING;
+
+INSERT INTO entry_examples (entry_id, title, prompt, result, steps, sort_order)
+SELECT entry.id, example.title, example.prompt, example.result, example.steps, example.sort_order
+FROM (VALUES
+    ('integral-immediate-reference', 'Integral de uma constante', '', '\int c\,dx=cx+C', ARRAY[]::TEXT[], 10),
+    ('integral-immediate-reference', 'Regra da potência', 'n diferente de -1', '\int x^n\,dx=\frac{x^{n+1}}{n+1}+C', ARRAY[]::TEXT[], 20),
+    ('integral-immediate-reference', 'Integral de um sobre x', 'x diferente de 0', '\int\frac{1}{x}\,dx=\ln|x|+C', ARRAY[]::TEXT[], 30),
+    ('integral-immediate-reference', 'Exponencial natural', '', '\int e^x\,dx=e^x+C', ARRAY[]::TEXT[], 40),
+    ('integral-immediate-reference', 'Exponencial de base a', 'a > 0 e a diferente de 1', '\int a^x\,dx=\frac{a^x}{\ln(a)}+C', ARRAY[]::TEXT[], 50),
+    ('integral-immediate-reference', 'Seno', 'x em radianos', '\int\sin(x)\,dx=-\cos(x)+C', ARRAY[]::TEXT[], 60),
+    ('integral-immediate-reference', 'Cosseno', 'x em radianos', '\int\cos(x)\,dx=\sin(x)+C', ARRAY[]::TEXT[], 70),
+    ('integral-immediate-reference', 'Tangente', 'Em intervalos onde o cosseno de x não é zero; x em radianos', '\int\tan(x)\,dx=-\ln|\cos(x)|+C', ARRAY[]::TEXT[], 80),
+    ('integral-immediate-reference', 'Cotangente', 'Em intervalos onde o seno de x não é zero; x em radianos', '\int\cot(x)\,dx=\ln|\sin(x)|+C', ARRAY[]::TEXT[], 90),
+    ('integral-immediate-reference', 'Secante', 'Em intervalos do domínio; x em radianos', '\int\sec(x)\,dx=\ln|\sec(x)+\tan(x)|+C', ARRAY[]::TEXT[], 100),
+    ('integral-immediate-reference', 'Cossecante', 'Em intervalos do domínio; x em radianos', '\int\csc(x)\,dx=\ln|\csc(x)-\cot(x)|+C', ARRAY[]::TEXT[], 110),
+    ('integral-immediate-reference', 'Secante ao quadrado', 'x em radianos', '\int\sec^2(x)\,dx=\tan(x)+C', ARRAY[]::TEXT[], 120),
+    ('integral-immediate-reference', 'Cossecante ao quadrado', 'x em radianos', '\int\csc^2(x)\,dx=-\cot(x)+C', ARRAY[]::TEXT[], 130),
+    ('integral-immediate-reference', 'Secante vezes tangente', 'x em radianos', '\int\sec(x)\tan(x)\,dx=\sec(x)+C', ARRAY[]::TEXT[], 140),
+    ('integral-immediate-reference', 'Cossecante vezes cotangente', 'x em radianos', '\int\csc(x)\cot(x)\,dx=-\csc(x)+C', ARRAY[]::TEXT[], 150),
+    ('integral-immediate-reference', 'Arco-tangente', 'x real', '\int\frac{1}{1+x^2}\,dx=\arctan(x)+C', ARRAY[]::TEXT[], 160),
+    ('integral-immediate-reference', 'Arco-seno', 'Para -1<x<1', '\int\frac{1}{\sqrt{1-x^2}}\,dx=\arcsin(x)+C', ARRAY[]::TEXT[], 170),
+    ('notable-angles-reference', '0°', '0 rad', '', ARRAY['sen(0°) = 0', 'cos(0°) = 1', 'tan(0°) = 0']::TEXT[], 10),
+    ('notable-angles-reference', '30°', 'π/6 rad', '', ARRAY['sen(30°) = 1/2', 'cos(30°) = √3/2', 'tan(30°) = √3/3']::TEXT[], 20),
+    ('notable-angles-reference', '45°', 'π/4 rad', '', ARRAY['sen(45°) = √2/2', 'cos(45°) = √2/2', 'tan(45°) = 1']::TEXT[], 30),
+    ('notable-angles-reference', '60°', 'π/3 rad', '', ARRAY['sen(60°) = √3/2', 'cos(60°) = 1/2', 'tan(60°) = √3']::TEXT[], 40),
+    ('notable-angles-reference', '90°', 'π/2 rad', '', ARRAY['sen(90°) = 1', 'cos(90°) = 0', 'tan(90°) = indefinida']::TEXT[], 50)
+) AS example(entry_slug, title, prompt, result, steps, sort_order)
+JOIN entries AS entry ON entry.slug = example.entry_slug
+ON CONFLICT (entry_id, title) DO UPDATE SET
+    prompt = EXCLUDED.prompt,
+    result = EXCLUDED.result,
+    steps = EXCLUDED.steps,
+    sort_order = EXCLUDED.sort_order;
+
+INSERT INTO entry_sources (entry_id, source_id, role)
+SELECT entry.id, source.id, 'supplementary'
+FROM (VALUES
+    ('integral-immediate-reference', 'Derivatives of Trigonometric Functions'),
+    ('integral-immediate-reference', 'Derivatives of Inverse Functions'),
+    ('integral-immediate-reference', 'Derivatives of Exponential and Logarithmic Functions')
+) AS reference_source(entry_slug, source_title)
+JOIN entries AS entry ON entry.slug = reference_source.entry_slug
+JOIN sources AS source ON source.title = reference_source.source_title
 ON CONFLICT DO NOTHING;
 
 INSERT INTO entry_notations (entry_id, label, format, notation)

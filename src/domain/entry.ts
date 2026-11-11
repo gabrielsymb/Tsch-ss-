@@ -1,4 +1,4 @@
-export type EntryKind = "derivative" | "integral" | "technique";
+export type EntryKind = "derivative" | "integral" | "technique" | "reference";
 
 export interface EntrySource {
   title: string;

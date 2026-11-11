@@ -8,9 +8,10 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
 }
 
 const app = await buildApp({ repository: new DemoEntryRepository() });
+const host = process.env.HOST ?? "127.0.0.1";
 
 try {
-  await app.listen({ host: "127.0.0.1", port });
+  await app.listen({ host, port });
 } catch (error) {
   app.log.error(error);
   process.exitCode = 1;

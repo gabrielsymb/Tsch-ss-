@@ -51,8 +51,20 @@ test(
         WHERE url = 'https://example.test/existing'
       `);
 
-      assert.equal(await applyMigrations(client, resolve("database/migrations")), 3);
+      assert.equal(await applyMigrations(client, resolve("database/migrations")), 5);
       assert.equal(await applyMigrations(client, resolve("database/migrations")), 0);
+      const discoveryTable = await client.query<{ table_name: string | null }>(
+        "SELECT to_regclass('discoveries')::text AS table_name",
+      );
+      assert.equal(discoveryTable.rows[0]?.table_name, "discoveries");
+      await client.query(`
+        INSERT INTO entries (
+          slug, title, kind, category_slug, expression, result, source_id
+        )
+        SELECT 'reference-entry', 'Reference entry', 'reference', 'existing',
+               'Table', 'Table data', id
+        FROM sources WHERE url = 'https://example.test/existing'
+      `);
 
       await client.query(`
         INSERT INTO entry_aliases (entry_id, alias)

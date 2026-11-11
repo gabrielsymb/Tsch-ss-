@@ -1,10 +1,10 @@
 {
-  "name": "calculo-dicionario-api",
+  "name": "tschuess",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "npm run db:init && tsx watch src/server.ts",
     "dev:demo": "tsx watch src/demo-server.ts",
     "start": "node dist/src/server.js",
     "build": "tsc -p tsconfig.json",

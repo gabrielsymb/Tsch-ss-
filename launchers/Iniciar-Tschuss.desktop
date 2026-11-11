@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Iniciar Tschüss
+Comment=Inicia o servidor local e abre o Tschüss no navegador
+Exec=/bin/bash -lc "exec ~/Documentos/tchuss/scripts/start-local.sh"
+Icon=utilities-terminal
+Terminal=true
+Categories=Education;
+StartupNotify=true

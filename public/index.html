@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Consulte regras de derivação, integrais e técnicas de integração para Cálculo I."
+      content="Pesquise conceitos e referências pelo nome ou assunto no catálogo Tschüss."
     >
-    <meta name="theme-color" content="#f5f4ef">
-    <title>Dicionário de Cálculo I</title>
+    <meta name="theme-color" content="#fffaf1">
+    <title>Tschüss</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/katex/katex.min.css">
     <link rel="stylesheet" href="/styles.css">
@@ -18,73 +18,146 @@
   <body>
     <a class="skip-link" href="#main">Ir para o conteúdo</a>
     <header class="site-header">
-      <a class="wordmark" href="/" aria-label="Dicionário de Cálculo I, início">
-        <span class="wordmark-symbol" aria-hidden="true">∫</span>
-        <span>Dicionário de Cálculo I</span>
-      </a>
-      <p>Regras, fórmulas e técnicas de derivação e integração.</p>
-    </header>
-
-    <main id="main">
-      <p id="demo-notice" class="demo-notice" role="status" hidden></p>
-      <section class="search-panel" aria-labelledby="search-title">
-        <p class="eyebrow">CONSULTA</p>
-        <h1 id="search-title">Encontre uma fórmula</h1>
-        <form id="search-form">
-          <label for="query">Nome, função ou notação</label>
-          <div class="search-row">
+      <div class="site-header-content">
+        <a class="wordmark" href="/" aria-label="Tschüss, início">
+          <img class="wordmark-icon" src="/icons/tchuss.svg" alt="">
+          <span class="wordmark-name">Tschüss</span>
+        </a>
+        <nav class="site-navigation" aria-label="Navegação principal">
+          <a id="discoveries-nav" href="#discoveries">Descobertas</a>
+        </nav>
+        <form id="search-form" class="top-search" role="search">
+          <div class="search-control">
+            <label class="visually-hidden" for="query">Nome, assunto ou expressão</label>
             <input
               id="query"
               name="q"
-              type="search"
+              type="text"
               maxlength="100"
               autocomplete="off"
-              placeholder="Ex.: regra da cadeia"
+              placeholder="Nome ou assunto"
+              aria-autocomplete="list"
+              aria-controls="suggestions"
+              aria-expanded="false"
+              aria-describedby="search-help"
             >
-            <button class="button button-primary" type="submit">Buscar</button>
+            <div
+              id="suggestions"
+              class="suggestions"
+              role="listbox"
+              aria-label="Sugestões de conteúdo"
+              hidden
+            ></div>
           </div>
-          <div class="filter-row">
-            <div class="field">
-              <label for="kind">Tipo</label>
-              <select id="kind" name="kind">
-                <option value="">Todos</option>
-                <option value="derivative">Derivadas</option>
-                <option value="integral">Integrais</option>
-                <option value="technique">Técnicas</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="category">Categoria</label>
-              <select id="category" name="category">
-                <option value="">Todas</option>
-              </select>
-            </div>
-            <button class="button button-secondary" id="clear-filters" type="button">
-              Limpar filtros
-            </button>
-          </div>
+          <button class="button button-primary" type="submit">Pesquisar</button>
+          <button
+            class="filter-toggle"
+            id="toggle-filters"
+            type="button"
+            aria-label="Abrir filtros"
+            aria-expanded="false"
+            aria-controls="search-panel"
+          >
+            <img src="/icons/filter.svg" alt="">
+          </button>
+          <span id="search-help" class="visually-hidden">
+            Sugestões clicáveis aparecem enquanto você digita. Use as setas para navegar.
+          </span>
         </form>
+      </div>
+    </header>
+
+    <main id="main">
+      <p id="demo-notice" class="notice notice-demo" role="status" hidden></p>
+      <p id="health-notice" class="notice notice-error" role="status" hidden></p>
+
+      <section id="welcome" class="welcome-panel" aria-labelledby="welcome-title">
+        <p class="eyebrow">TSCHÜSS · CATÁLOGO DE CONSULTA</p>
+        <h1 id="welcome-title">Pesquise no catálogo</h1>
+        <p>Encontre conceitos e referências pelo nome ou assunto.</p>
       </section>
 
-      <div class="content-layout">
-        <section class="results-section" aria-labelledby="results-title">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">CATÁLOGO</p>
-              <h2 id="results-title">Resultados</h2>
-            </div>
-            <p id="result-count" class="result-count" aria-live="polite"></p>
+      <section
+        id="discoveries"
+        class="discoveries-section"
+        aria-labelledby="discoveries-title"
+      >
+        <div class="discoveries-heading">
+          <div>
+            <p class="eyebrow">LEITURA E MATEMÁTICA</p>
+            <h2 id="discoveries-title">Descobertas</h2>
           </div>
-          <p id="status" class="status" role="status" aria-live="polite"></p>
-          <ol id="results" class="results-list"></ol>
-          <nav id="pagination" class="pagination" aria-label="Paginação"></nav>
+          <p>Novos textos de matemática, estatística e probabilidade, selecionados para estudo.</p>
+        </div>
+        <div id="discovery-age-gate" class="discovery-age-gate">
+          <p>Esta seção é destinada somente a pessoas com 18 anos ou mais.</p>
+          <button id="confirm-discovery-age" class="button button-secondary" type="button">
+            Tenho 18 anos ou mais
+          </button>
+        </div>
+        <div id="discovery-content" hidden>
+          <p id="discovery-status" class="discovery-status" role="status" aria-live="polite"></p>
+          <ol id="discovery-cards" class="discovery-grid" aria-busy="false"></ol>
+          <button id="explore-discoveries" class="button button-secondary" type="button" hidden>
+            Explorar todas as descobertas
+          </button>
+          <section id="discovery-exploration" aria-label="Explorar descobertas" hidden>
+            <h3>Explorar descobertas</h3>
+            <ol id="discovery-results" class="discovery-grid"></ol>
+            <nav id="discovery-pagination" class="pagination" aria-label="Paginação das descobertas"></nav>
+          </section>
+        </div>
+      </section>
+
+      <section id="search-panel" class="search-panel" aria-labelledby="search-title" hidden>
+        <div class="filter-heading">
+          <div>
+            <h2 id="search-title">Filtros</h2>
+          </div>
+          <button class="button button-secondary clear-button" id="clear-filters" type="button">
+            Limpar
+          </button>
+        </div>
+        <div class="filter-row">
+          <div class="field">
+            <label for="kind">Tipo de conteúdo</label>
+            <select id="kind" name="kind" form="search-form">
+              <option value="">Todos os tipos</option>
+              <option value="derivative">Derivadas</option>
+              <option value="integral">Integrais</option>
+              <option value="technique">Técnicas</option>
+              <option value="reference">Tabelas de consulta</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="category">Categoria</label>
+            <select id="category" name="category" form="search-form">
+              <option value="">Todas as categorias</option>
+            </select>
+          </div>
+        </div>
+        <p id="filter-status" class="filter-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <div id="content-layout" class="content-layout" hidden>
+        <section class="results-section" aria-labelledby="results-title">
+          <h2 id="results-title" class="visually-hidden">Resultados da busca</h2>
+          <div id="status" class="status" role="status" aria-live="polite" aria-atomic="true"></div>
+          <ol id="results" class="results-list" aria-busy="false"></ol>
+          <nav id="pagination" class="pagination" aria-label="Paginação dos resultados"></nav>
         </section>
-        <section id="entry-detail" class="detail-panel" aria-live="polite" hidden></section>
+        <section
+          id="entry-detail"
+          class="detail-panel"
+          aria-labelledby="detail-title"
+          aria-busy="false"
+          hidden
+        ></section>
       </div>
     </main>
 
     <footer class="site-footer">
-      <p>Consulta pública, sem cadastro.</p>
+      <p>Tschüss · Catálogo de consulta</p>
     </footer>
   </body>
 </html>

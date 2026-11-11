@@ -54,6 +54,27 @@ test("entry search endpoint returns paginated JSON", async () => {
   }
 });
 
+test("entry search endpoint accepts reference-table filtering", async () => {
+  const repository = new TestRepository();
+  const app = await buildApp({
+    repository,
+    checkDatabase: async () => {},
+    logger: false,
+  });
+
+  try {
+    const response = await app.inject({
+      method: "GET",
+      url: "/api/v1/entries?kind=reference",
+    });
+
+    assert.equal(response.statusCode, 200);
+    assert.equal(repository.receivedFilters?.kind, "reference");
+  } finally {
+    await app.close();
+  }
+});
+
 test("entry search endpoint reports invalid query parameters", async () => {
   const app = await buildApp({
     repository: new TestRepository(),
@@ -82,7 +103,7 @@ test("entry search endpoint reports invalid query parameters", async () => {
   }
 });
 
-test("serves the mobile-friendly dictionary interface and its local assets", async () => {
+test("serves the mobile-friendly Tschüss interface and its local assets", async () => {
   const app = await buildApp({
     repository: new TestRepository(),
     logger: false,
@@ -93,7 +114,24 @@ test("serves the mobile-friendly dictionary interface and its local assets", asy
     assert.equal(page.statusCode, 200);
     assert.match(page.headers["content-type"] ?? "", /text\/html/);
     assert.match(page.body, /name="viewport"/);
-    assert.match(page.body, /Dicionário de Cálculo I/);
+    assert.match(page.body, /<title>Tschüss<\/title>/);
+    assert.match(page.body, /\/icons\/tchuss\.svg/);
+    assert.match(page.body, /id="toggle-filters"/);
+    assert.match(page.body, /\/icons\/filter\.svg/);
+    assert.match(page.body, /<h1 id="welcome-title">Pesquise no catálogo<\/h1>/);
+    assert.match(page.body, /id="discoveries"/);
+    assert.match(page.body, /Descobertas/);
+    assert.match(page.body, /id="confirm-discovery-age"/);
+    assert.match(page.body, /id="search-panel"[^>]*hidden/);
+    assert.match(page.body, /id="content-layout"[^>]*hidden/);
+    assert.match(page.body, /Resultados da busca/);
+    assert.doesNotMatch(page.body, /id="result-count"/);
+    assert.match(page.body, /<form id="search-form" class="top-search" role="search">/);
+    assert.match(page.body, /id="query"/);
+    assert.match(page.body, /type="text"/);
+    assert.doesNotMatch(page.body, /type="search"/);
+    assert.match(page.body, /id="suggestions"/);
+    assert.match(page.body, /aria-autocomplete="list"/);
     assert.match(page.body, /\/katex\/katex\.min\.css/);
     assert.match(page.body, /\/katex\/katex\.min\.js/);
 
@@ -101,14 +139,34 @@ test("serves the mobile-friendly dictionary interface and its local assets", asy
     assert.equal(stylesheet.statusCode, 200);
     assert.match(stylesheet.headers["content-type"] ?? "", /text\/css/);
     assert.match(stylesheet.body, /:focus-visible/);
+    assert.match(stylesheet.body, /position:\s*sticky/);
 
     const script = await app.inject({ method: "GET", url: "/app.js" });
     assert.equal(script.statusCode, 200);
     assert.match(script.headers["content-type"] ?? "", /javascript/);
 
+    const discoveries = await app.inject({
+      method: "GET",
+      url: "/api/v1/discoveries",
+    });
+    assert.equal(discoveries.statusCode, 200);
+    assert.match(discoveries.headers["cache-control"] ?? "", /no-store/);
+    assert.deepEqual(discoveries.json(), {
+      data: [],
+      pagination: { limit: 4, offset: 0, total: 0 },
+    });
+
     const favicon = await app.inject({ method: "GET", url: "/favicon.svg" });
     assert.equal(favicon.statusCode, 200);
     assert.match(favicon.headers["content-type"] ?? "", /image\/svg\+xml/);
+
+    const appIcon = await app.inject({ method: "GET", url: "/icons/tchuss.svg" });
+    assert.equal(appIcon.statusCode, 200);
+    assert.match(appIcon.headers["content-type"] ?? "", /image\/svg\+xml/);
+
+    const filterIcon = await app.inject({ method: "GET", url: "/icons/filter.svg" });
+    assert.equal(filterIcon.statusCode, 200);
+    assert.match(filterIcon.headers["content-type"] ?? "", /image\/svg\+xml/);
 
     const katexStylesheet = await app.inject({ method: "GET", url: "/katex/katex.min.css" });
     assert.equal(katexStylesheet.statusCode, 200);

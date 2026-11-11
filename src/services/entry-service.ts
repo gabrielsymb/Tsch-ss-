@@ -57,7 +57,9 @@ function parseFilters(input: EntrySearchInput): EntryFilters {
   const kindInput = singleValue(input.kind, "kind");
   if (kindInput !== undefined) {
     if (!isEntryKind(kindInput)) {
-      throw new InvalidQueryError("kind deve ser derivative, integral ou technique.");
+      throw new InvalidQueryError(
+        "kind deve ser derivative, integral, technique ou reference.",
+      );
     }
     kind = kindInput;
   }
@@ -91,7 +93,8 @@ function parseFilters(input: EntrySearchInput): EntryFilters {
 }
 
 function isEntryKind(value: string): value is EntryKind {
-  return value === "derivative" || value === "integral" || value === "technique";
+  return value === "derivative" || value === "integral" ||
+    value === "technique" || value === "reference";
 }
 
 function singleValue(value: string | string[] | undefined, name: string): string | undefined {

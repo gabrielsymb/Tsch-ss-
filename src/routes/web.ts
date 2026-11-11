@@ -8,7 +8,9 @@ const assets = [
   { route: "/", file: "index.html", contentType: "text/html; charset=utf-8" },
   { route: "/styles.css", file: "styles.css", contentType: "text/css; charset=utf-8" },
   { route: "/app.js", file: "app.js", contentType: "text/javascript; charset=utf-8" },
-  { route: "/favicon.svg", file: "favicon.svg", contentType: "image/svg+xml" },
+  { route: "/favicon.svg", file: "icons/tchuss.svg", contentType: "image/svg+xml" },
+  { route: "/icons/tchuss.svg", file: "icons/tchuss.svg", contentType: "image/svg+xml" },
+  { route: "/icons/filter.svg", file: "icons/filter.svg", contentType: "image/svg+xml" },
 ] as const;
 const katexAssets = [
   { route: "/katex/katex.min.css", file: "katex.min.css", contentType: "text/css; charset=utf-8" },
